@@ -25,7 +25,6 @@ class FornecedorController extends Controller
         $request->validate([
             'nome' => 'required|string|max:255',
             'cnpj' => 'required|string|max:18',
-            'endereco' => 'required|string|max:255',
             'telefone' => 'nullable|string|max:15',
         ]);
 
@@ -61,7 +60,6 @@ class FornecedorController extends Controller
         $request->validate([
             'nome' => 'required|string|max:255',
             'cnpj' => 'required|string|max:18',
-            'endereco' => 'required|string|max:255',
             'telefone' => 'nullable|string|max:15',
         ]);
 
