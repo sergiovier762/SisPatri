@@ -8,7 +8,7 @@
         "php": "^8.2",
         "laravel/framework": "^11.9",
         "laravel/tinker": "^2.9",
-        "maatwebsite/excel": "^1.1"
+        "maatwebsite/excel": "3.1.60"
     },
     "require-dev": {
         "fakerphp/faker": "^1.23",
@@ -27,6 +27,10 @@
         },
         "files": [
             "app/Helpers/helpers.php"
+        ],
+        "exclude-from-classmap": [
+            "vendor/league/flysystem-local/*",
+            "vendor/laravel/pint/app/Providers/AppServiceProvider.php"
         ]
     },
     "autoload-dev": {

@@ -123,4 +123,10 @@ return [
         'store' => env('APP_MAINTENANCE_STORE', 'database'),
     ],
 
+    'aliases' => [
+        // Outros aliases...
+        'Redirect' => Illuminate\Support\Facades\Redirect::class,
+        // Outros aliases...
+    ],
+
 ];
