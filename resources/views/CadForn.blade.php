@@ -163,10 +163,6 @@
                                             <input type="text" class="form-control" id="cnpj" name="cnpj" maxlength="14" required>
                                         </div>
                                         <div class="form-group">
-                                            <label for="endereco">Endereço</label>
-                                            <input type="text" class="form-control" id="endereco" name="endereco" required>
-                                        </div>
-                                        <div class="form-group">
                                             <label for="telefone">Telefone</label>
                                             <input type="text" class="form-control" id="telefone" name="telefone">
                                         </div>

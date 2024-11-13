@@ -165,7 +165,6 @@
                                             <tr>
                                                 <td>{{ $fornecedor->nome }}</td>
                                                 <td>{{ formatarCNPJ($fornecedor->cnpj) }}</td>
-                                                <td>{{ $fornecedor->endereco }}</td>
                                                 <td>{{ $fornecedor->telefone }}</td>
                                                 <td>
                                                     <a href="{{ route('fornecedores.edit', $fornecedor->id) }}" class="btn btn-primary btn-sm">Editar</a>

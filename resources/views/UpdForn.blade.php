@@ -161,10 +161,6 @@
                                             <input type="text" class="form-control" id="cnpj" name="cnpj" value="{{ $fornecedor->cnpj }}" required>
                                         </div>
                                         <div class="form-group">
-                                            <label for="endereco">Endereço</label>
-                                            <input type="text" class="form-control" id="endereco" name="endereco" value="{{ $fornecedor->endereco }}" required>
-                                        </div>
-                                        <div class="form-group">
                                             <label for="telefone">Telefone</label>
                                             <input type="text" class="form-control" id="telefone" name="telefone" value="{{ $fornecedor->telefone }}" required>
                                         </div>
