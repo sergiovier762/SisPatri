@@ -32,7 +32,10 @@ class ProdutoController extends Controller
         ]);
 
         $produto = Produto::create($input);
-        return redirect()->route('produtos.create')->with('success');
+        return redirect()->route('produtos')->with([
+            'success' => 'Produto cadastrado com sucesso!',
+            'produto_id' => $produto->id
+        ]);
     }
 
     public function index(Request $request)
@@ -121,5 +124,23 @@ class ProdutoController extends Controller
         $produtos = Produto::where('nome', 'LIKE', "%{$query}%")->get();
 
         return view('Produto', compact('produtos'));
+    }
+
+    public function duplicate($id)
+    {
+        $produto = Produto::find($id);
+
+        if (!$produto) {
+            return redirect()->route('produtos')->with('error', 'Produto não encontrado.');
+        }
+
+        $dadosProduto = $produto->toArray();
+    unset($dadosProduto['numero_patrimonio']);
+
+        return view('CadProd', [
+            'salas' => Sala::all(),
+            'fornecedores' => Fornecedor::all(),
+            'produto' => $dadosProduto
+        ]);
     }
 }

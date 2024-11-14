@@ -39,6 +39,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::put('produtos/{id}', [ProdutoController::class, 'update'])->name('produtos.update');
     Route::delete('produtos/{id}', [ProdutoController::class, 'destroy'])->name('produtos.destroy');
     Route::get('produtos/search', [ProdutoController::class, 'search'])->name('produtos.search');
+    Route::get('/produtos/duplicate/{id}', [ProdutoController::class, 'duplicate'])->name('produtos.duplicate');
 
     Route::get('fornecedores', [FornecedorController::class, 'index'])->name('fornecedores');
     Route::get('fornecedores/create', [FornecedorController::class, 'create'])->name('fornecedores.create');

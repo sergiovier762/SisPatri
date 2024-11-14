@@ -207,7 +207,7 @@
                                             <tr>
                                                 <td>{{ $produto->nome }}</td>
                                                 <td>{{ $produto->descricao }}</td>
-                                                <td>{{ $produto->preco }}</td>
+                                                <td>{{"R$ " . number_format($produto->preco, 2, ',', '.') }}</td>
                                                 <td>{{ $produto->sala->nome }}</td>
                                                 <td>{{ $produto->fornecedor->nome }}</td>
                                                 <td>{{ $produto->numero_fatura }}</td>
@@ -215,10 +215,11 @@
                                                 <td>{{ \Carbon\Carbon::parse($produto->data_aquisicao)->format('d/m/Y') }}</td>
                                                 <td>
                                                     <a href="{{ route('produtos.edit', $produto->id) }}" class="btn btn-primary btn-sm">Editar</a>
+                                                    <a href="{{ route('produtos.duplicate', $produto->id) }}" class="btn btn-warning btn-sm">Duplicar</a>
                                                     <form action="{{ route('produtos.destroy', $produto->id) }}" method="POST" style="display:inline-block;">
                                                         @csrf
                                                         @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja excluir este fornecedor?')">Excluir</button>
+                                                        <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Tem certeza que deseja excluir este produto?')">Excluir</button>
                                                     </form>
                                                 </td>
                                             </tr>
@@ -243,11 +244,12 @@
     <!-- ./wrapper -->
 
     <!-- SweetAlert -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Exibir mensagens de sucesso ou erro -->
     @if(session('success'))
-    <script>
+    <script>''
         Swal.fire({
             icon: 'success',
             title: 'Sucesso!',

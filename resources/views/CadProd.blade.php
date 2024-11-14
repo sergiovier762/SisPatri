@@ -163,21 +163,21 @@
                                         @csrf
                                         <div class="form-group">
                                             <label for="nome">Nome</label>
-                                            <input type="text" class="form-control" id="nome" name="nome" required>
+                                            <input type="text" class="form-control" id="nome" name="nome" value="{{ old('nome', $produto['nome'] ?? '') }}" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="descricao">Descrição</label>
-                                            <input type="text" class="form-control" id="descricao" name="descricao" required>
+                                            <input type="text" class="form-control" id="descricao" name="descricao" value="{{ old('descricao', $produto['descricao'] ?? '') }}" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="preco">Preço</label>
-                                            <input type="number" class="form-control" id="preco" name="preco" required onwheel="this.blur()">
+                                            <input type="number" class="form-control" id="preco" name="preco" value="{{ old('preco', $produto['preco'] ?? '') }}" required onwheel="this.blur()">
                                         </div>
                                         <div class="form-group">
                                             <label for="sala_id">Sala</label>
                                             <select class="form-control" id="sala_id" name="sala_id" required>
                                                 @foreach($salas as $sala)
-                                                <option value="{{ $sala->id }}">{{ $sala->nome }}</option>
+                                                <option value="{{ $sala->id }}" {{ (old('sala_id', $produto['sala_id'] ?? '') == $sala->id) ? 'selected' : '' }}>{{ $sala->nome }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
@@ -185,21 +185,21 @@
                                             <label for="fornecedor_id">Fornecedor</label>
                                             <select class="form-control" id="fornecedor_id" name="fornecedor_id" required>
                                                 @foreach($fornecedores as $fornecedor)
-                                                <option value="{{ $fornecedor->id }}">{{ $fornecedor->nome }}</option>
+                                                <option value="{{ $fornecedor->id }}" {{ (old('fornecedor_id', $produto['fornecedor_id'] ?? '') == $fornecedor->id) ? 'selected' : '' }}>{{ $fornecedor->nome }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
                                         <div class="form-group">
                                             <label for="numero_fatura">Número da Fatura</label>
-                                            <input type="text" class="form-control" id="numero_fatura" name="numero_fatura" required>
+                                            <input type="text" class="form-control" id="numero_fatura" name="numero_fatura" value="{{ old('numero_fatura', $produto['numero_fatura'] ?? '') }}" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="numero_patrimonio">Número do Patrimônio</label>
-                                            <input type="text" class="form-control" id="numero_patrimonio" name="numero_patrimonio" required>
+                                            <input type="text" class="form-control" id="numero_patrimonio" name="numero_patrimonio" value="{{ old('numero_patrimonio') }}" required>
                                         </div>
                                         <div class="form-group">
                                             <label for="data_aquisicao">Data de Aquisição</label>
-                                            <input type="date" class="form-control" id="data_aquisicao" name="data_aquisicao" required>
+                                            <input type="date" class="form-control" id="data_aquisicao" name="data_aquisicao" value="{{ old('data_aquisicao', $produto['data_aquisicao'] ?? '') }}" required>
                                         </div>
                                         <button type="submit" class="btn btn-primary">Cadastrar</button>
                                     </form>
@@ -223,22 +223,23 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <!-- Exibir mensagens de sucesso ou erro -->
-    @if(session('success'))
+    @if(session('success') && session('produto_id'))
     <script>
+        $(document).ready(function() {
         Swal.fire({
             icon: 'success',
             title: 'Sucesso!',
             text: '{{ session("success") }}',
             showCancelButton: true,
-            confirmButtonText: 'Cadastrar Outro Produto',
-            cancelButtonText: 'Voltar para a Lista'
+            confirmButtonText: 'Duplicar Produto',
+            cancelButtonText: 'Cadastrar Outro Produto',
+            showDenyButton: true,
+            denyButtonText: 'Fechar'
         }).then((result) => {
             if (result.isConfirmed) {
-
-                window.location.href = "{{ route('produtos.create') }}";
-            } else {
-                window.location.href = "{{ route('produtos') }}";
+                window.location.href = "{{ route('produtos.duplicate', session('produto_id')) }}";
             }
+            });
         });
     </script>
     @endif
