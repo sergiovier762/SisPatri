@@ -191,7 +191,16 @@
             icon: 'success',
             title: 'Sucesso!',
             text: '{{ session("success") }}',
-            confirmButtonText: 'OK'
+            showCancelButton: true,
+            confirmButtonText: 'Cadastrar Outro Fornecedor',
+            cancelButtonText: 'Voltar para a Lista'
+        }).then((result) => {
+            if (result.isConfirmed) {
+
+                window.location.href = "{{ route('fornecedores.create') }}";
+            } else {
+                window.location.href = "{{ route('fornecedores') }}";
+            }
         });
     </script>
     @endif
@@ -206,13 +215,5 @@
         });
     </script>
     @endif
-
-    <script>
-        document.getElementById('fornecedorForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            alert('Fornecedor cadastrado com sucesso!');
-            this.submit();
-        });
-    </script>
 </body>
 @endsection

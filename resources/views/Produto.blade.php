@@ -146,21 +146,59 @@
                             <div class="card">
                                 <div class="card-header">
                                     <h3 class="card-title">Produtos Cadastrados</h3>
-                                    <a href="{{ route('produtos.create') }}" class="btn btn-success float-right">Cadastrar Produto</a>
+                                    <div class="float-right">
+                                        <form action="{{ route('produtos') }}" method="GET" class="form-inline">
+                                            <input type="text" name="query" class="form-control mr-2" placeholder="Buscar Produto">
+                                            <button type="submit" class="btn btn-primary mr-2">Buscar</button>
+                                            <a href="{{ route('produtos.create') }}" class="btn btn-success">Cadastrar Produto</a>
+                                        </form>
+                                    </div>
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
                                     <table id="example1" class="table table-bordered table-striped">
                                         <thead>
                                             <tr>
-                                                <th>Nome</th>
-                                                <th>Descrição</th>
-                                                <th>Preço</th>
-                                                <th>Sala</th>
-                                                <th>Fornecedor</th>
-                                                <th>Número da Fatura</th>
-                                                <th>Número do Patrimônio</th>
-                                                <th>Data de Aquisição</th>
+                                                <th>
+                                                    <a href="{{ route('produtos', ['sort' => 'nome', 'direction' => $direction == 'asc' ? 'desc' : 'asc']) }}" style="color: black;">
+                                                        Nome
+                                                    </a>
+                                                </th>
+                                                <th>
+                                                    <a href="{{ route('produtos', ['sort' => 'descricao', 'direction' => $direction == 'asc' ? 'desc' : 'asc']) }}" style="color: black;">
+                                                        Descrição
+                                                    </a>
+                                                </th>
+                                                <th>
+                                                    <a href="{{ route('produtos', ['sort' => 'preco', 'direction' => $direction == 'asc' ? 'desc' : 'asc']) }}" style="color: black;">
+                                                        Preço
+                                                    </a>
+                                                </th>
+                                                <th>
+                                                    <a href="{{ route('produtos', ['sort' => 'sala_id', 'direction' => $direction == 'asc' ? 'desc' : 'asc']) }}" style="color: black;">
+                                                        Sala
+                                                    </a>
+                                                </th>
+                                                <th>
+                                                    <a href="{{ route('produtos', ['sort' => 'fornecedor_id', 'direction' => $direction == 'asc' ? 'desc' : 'asc']) }}" style="color: black;">
+                                                        Fornecedor
+                                                    </a>
+                                                </th>
+                                                <th>
+                                                    <a href="{{ route('produtos', ['sort' => 'numero_fatura', 'direction' => $direction == 'asc' ? 'desc' : 'asc']) }}" style="color: black;">
+                                                        Número da Fatura
+                                                    </a>
+                                                </th>
+                                                <th>
+                                                    <a href="{{ route('produtos', ['sort' => 'numero_patrimonio', 'direction' => $direction == 'asc' ? 'desc' : 'asc']) }}" style="color: black;">
+                                                        Número do Patrimônio
+                                                    </a>
+                                                </th>
+                                                <th>
+                                                    <a href="{{ route('produtos', ['sort' => 'data_aquisicao', 'direction' => $direction == 'asc' ? 'desc' : 'asc']) }}" style="color: black;">
+                                                        Data de Aquisição
+                                                    </a>
+                                                </th>
                                                 <th>Ações</th>
                                             </tr>
                                         </thead>
@@ -174,7 +212,7 @@
                                                 <td>{{ $produto->fornecedor->nome }}</td>
                                                 <td>{{ $produto->numero_fatura }}</td>
                                                 <td>{{ $produto->numero_patrimonio }}</td>
-                                                <td>{{ $produto->data_aquisicao }}</td>
+                                                <td>{{ \Carbon\Carbon::parse($produto->data_aquisicao)->format('d/m/Y') }}</td>
                                                 <td>
                                                     <a href="{{ route('produtos.edit', $produto->id) }}" class="btn btn-primary btn-sm">Editar</a>
                                                     <form action="{{ route('produtos.destroy', $produto->id) }}" method="POST" style="display:inline-block;">

@@ -32,14 +32,17 @@ class ProdutoController extends Controller
         ]);
 
         $produto = Produto::create($input);
-        return response()->json(['success' => true]);
+        return redirect()->route('produtos.create')->with('success');
     }
 
-    public function index()
+    public function index(Request $request)
     {
-        $produtos = Produto::with(['sala', 'fornecedor'])->get();
-        $produtosCount = Produto::count();
-        return view('Produto', compact('produtos', 'produtosCount'));
+        $sort = $request->get('sort', 'nome');
+        $direction = $request->get('direction', 'asc');
+
+        $produtos = Produto::orderBy($sort, $direction)->get();
+
+        return view('Produto', compact('produtos', 'sort', 'direction'));
     }
 
     public function destroy(string $id)
@@ -86,7 +89,7 @@ class ProdutoController extends Controller
             'numero_patrimonio' => ['required', 'unique:produtos,numero_patrimonio,' . $produto->id],
             'data_aquisicao' => ['required', 'date']
         ], [
-            'numero_patrimonio.unique' => 'O número de patrimônio já existe.', // Mensagem personalizada
+            'numero_patrimonio.unique' => 'O número de patrimônio já existe.',
         ]);
 
         if ($produto->update($input)) {

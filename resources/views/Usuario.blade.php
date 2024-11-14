@@ -145,8 +145,11 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title text-center">Usuários Cadastrados</h3>
-                                    <a href="{{ route('usuarios.create') }}" class="btn btn-success float-right">Cadastrar Usuário</a>
+                                    <form action="{{ route('usuarios') }}" method="GET" class="form-inline">
+                                        <input type="text" name="query" class="form-control mr-2" placeholder="Buscar Usuário">
+                                        <button type="submit" class="btn btn-primary mr-2">Buscar</button>
+                                        <a href="{{ route('usuarios.create') }}" class="btn btn-success">Cadastrar Usuário</a>
+                                    </form>
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">

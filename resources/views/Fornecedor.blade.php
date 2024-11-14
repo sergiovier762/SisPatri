@@ -146,7 +146,12 @@
                             <div class="card">
                                 <div class="card-header">
                                     <h3 class="card-title">Fornecedores Cadastrados</h3>
-                                    <a href="{{ route('fornecedores.create') }}" class="btn btn-success float-right">Cadastrar Fornecedor</a>
+                                    <div class="float-right">
+                                        <form action="{{ route('fornecedores') }}" method="GET" class="form-inline">
+                                        <input type="text" name="query" class="form-control mr-2" placeholder="Buscar Fornecedor">
+                                        <button type="submit" class="btn btn-primary mr-2">Buscar</button>
+                                        <a href="{{ route('fornecedores.create') }}" class="btn btn-success">Cadastrar Fornecedor</a>
+                                    </form>
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">
@@ -155,7 +160,6 @@
                                             <tr>
                                                 <th>Nome</th>
                                                 <th>CNPJ</th>
-                                                <th>Endereço</th>
                                                 <th>Telefone</th>
                                                 <th>Ações</th>
                                             </tr>

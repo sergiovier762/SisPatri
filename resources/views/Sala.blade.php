@@ -145,8 +145,13 @@
                         <div class="col-12">
                             <div class="card">
                                 <div class="card-header">
-                                    <h3 class="card-title text-center">Salas Cadastradas</h3>
-                                    <a href="{{ route('salas.create') }}" class="btn btn-success float-right">Cadastrar Sala</a>
+                                    <h3 class="card-title">Salas Cadastradas</h3>
+                                    <div class="float-right">
+                                        <form action="{{ route('salas') }}" method="GET" class="form-inline">
+                                            <input type="text" name="query" class="form-control mr-2" placeholder="Buscar Sala">
+                                        <button type="submit" class="btn btn-primary mr-2">Buscar</button>
+                                        <a href="{{ route('salas.create') }}" class="btn btn-success">Cadastrar Sala</a>
+                                    </form>
                                 </div>
                                 <!-- /.card-header -->
                                 <div class="card-body">

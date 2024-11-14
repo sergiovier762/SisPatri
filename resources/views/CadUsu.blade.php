@@ -186,6 +186,40 @@
         <!-- /.content-wrapper -->
     </div>
     <!-- ./wrapper -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- Exibir mensagens de sucesso ou erro -->
+@if(session('success'))
+<script>
+    Swal.fire({
+        icon: 'success',
+        title: 'Sucesso!',
+        text: '{{ session("success") }}',
+        showCancelButton: true,
+        confirmButtonText: 'Cadastrar Outro Usuário',
+        cancelButtonText: 'Voltar para a Lista'
+    }).then((result) => {
+        if (result.isConfirmed) {
+
+            window.location.href = "{{ route('usuarios.create') }}";
+        } else {
+            window.location.href = "{{ route('usuarios') }}";
+        }
+    });
+</script>
+@endif
+
+@if(session('error'))
+<script>
+    Swal.fire({
+        icon: 'error',
+        title: 'Erro!',
+        text: '{{ session("error") }}',
+        confirmButtonText: 'OK'
+    });
+    </script>
+    @endif
+    
 </body>
 
 @endsection
