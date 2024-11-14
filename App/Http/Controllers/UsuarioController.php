@@ -2,12 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Spatie\Permission\Models\Permission;
+use Illuminate\Routing\Controller;
 
 class UsuarioController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('can:access user page')->only('index');
+    }
+
     public function index()
     {
         $usuarios = User::all();
@@ -20,23 +26,25 @@ class UsuarioController extends Controller
     }
 
     public function store(Request $request) 
-{
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'usuario' => 'required|string|max:255|unique:users',
-        'senha' => 'required|string|min:8',
-    ]);
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'usuario' => 'required|string|max:255|unique:users',
+            'senha' => 'required|string|min:8',
+        ]);
 
-    $user = User::create([
-        'name' => $request->input('name'),
-        'usuario' => $request->input('usuario'),
-        'senha' => bcrypt($request->input('senha')),
-    ]);
+        $user = User::create([
+            'name' => $request->input('name'),
+            'usuario' => $request->input('usuario'),
+            'senha' => bcrypt($request->input('senha')),
+        ]);
 
-    return redirect()->route('usuarios.create')
+        $user->assignRole('user');
+
+        return redirect()->route('usuarios')
                          ->with('success', 'Usuário criado com sucesso.')
                          ->with('popup', true);
-}
+    }
 
     public function show(User $usuario)
     {
@@ -56,16 +64,22 @@ class UsuarioController extends Controller
             'senha' => 'nullable|string|min:8',
         ]);
 
-        $usuario->update($request->all());
+        $data = $request->only(['name', 'usuario']);
+        if ($request->filled('senha')) {
+            $data['senha'] = bcrypt($request->input('senha'));
+        }
+
+        $usuario->update($data);
 
         return redirect()->route('usuarios')
                          ->with('success', 'Usuário atualizado com sucesso.');
     }
 
-    public function destroy(string $id){
+    public function destroy(string $id)
+    {
         $usuario = User::find($id);
 
-        if($usuario){
+        if ($usuario) {
             $usuario->delete();
             return redirect()->route('usuarios')->with('success', 'Usuário excluído com sucesso!');
         } else {
@@ -80,5 +94,36 @@ class UsuarioController extends Controller
  
         return view('Usuario', compact('usuarios'));
     }  
-    
+
+    public function showUserPermissions()
+    {
+        $users = User::all();
+        $permissions = Permission::all();
+
+        return view('Usuario', compact('users', 'permissions'));
+    }
+
+    public function updateUserPermissions(Request $request)
+    {
+        foreach ($request->permissions as $userId => $permissions) {
+            $user = User::find($userId);
+            if ($user) {
+                $user->syncPermissions($permissions);
+            }
+        }
+
+        return redirect()->back()->with('success', 'Permissões atualizadas com sucesso!');
+    }
+
+    public function assignRoleToUser($userId)
+    {
+        $user = User::find($userId);
+
+        if ($user) {
+            $user->assignRole('user');
+            return "Papel atribuído com sucesso!";
+        }
+
+        return "Usuário não encontrado.";
+    }
 }

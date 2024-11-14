@@ -156,7 +156,6 @@
                                                 <th>Nome</th>
                                                 <th>Descrição</th>
                                                 <th>Preço</th>
-                                                <th>Quantidade</th>
                                                 <th>Sala</th>
                                                 <th>Fornecedor</th>
                                                 <th>Número da Fatura</th>
@@ -171,7 +170,6 @@
                                                 <td>{{ $produto->nome }}</td>
                                                 <td>{{ $produto->descricao }}</td>
                                                 <td>{{ $produto->preco }}</td>
-                                                <td>{{ $produto->quantidade }}</td>
                                                 <td>{{ $produto->sala->nome }}</td>
                                                 <td>{{ $produto->fornecedor->nome }}</td>
                                                 <td>{{ $produto->numero_fatura }}</td>

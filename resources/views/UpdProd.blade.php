@@ -151,10 +151,6 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="quantidade">Quantidade</label>
-                                            <input type="number" class="form-control" id="quantidade" name="quantidade" value="{{ $produto->quantidade }}" required>
-                                        </div>
-                                        <div class="form-group">
                                             <label for="fornecedor_id">Fornecedor</label>
                                             <select class="form-control" id="fornecedor_id" name="fornecedor_id" required>
                                                 @foreach($fornecedores as $fornecedor)

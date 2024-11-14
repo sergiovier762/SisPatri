@@ -155,6 +155,7 @@
                                             <tr>
                                                 <th>Nome</th>
                                                 <th>Usuário</th>
+                                                <th>Permissões</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -162,6 +163,11 @@
                                             <tr>
                                                 <td>{{ $usuario->name }}</td>
                                                 <td>{{ $usuario->usuario }}</td>
+                                                <td>
+                                                    @foreach($usuario->getAllPermissions() as $permission)
+                                                        <span class="badge badge-info">{{ $permission->name }}</span>
+                                                    @endforeach
+                                                </td>
                                                 <td>
                                                     <a href="{{ route('usuarios.edit', $usuario->id) }}" class="btn btn-primary btn-sm">Editar</a>
                                                     <form action="{{ route('usuarios.destroy', $usuario->id) }}" method="POST" style="display:inline-block;">

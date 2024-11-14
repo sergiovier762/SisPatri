@@ -2,22 +2,39 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\User;
+use Spatie\Permission\Models\Role;
+use Spatie\Permission\Models\Permission;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        User::factory(2)->create();
+        // Resetar cache de permissões
+        app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
 
-        // User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        // Criar permissões se não existirem
+        $permissions = ['access user page', 'create reports'];
+        foreach ($permissions as $permission) {
+            Permission::firstOrCreate(['name' => $permission]);
+        }
+
+        // Criar papel e atribuir permissões
+        $role = Role::firstOrCreate(['name' => 'user']);
+        $role->syncPermissions($permissions);
+
+        // Criar usuário e atribuir papel
+        $user = User::firstOrCreate(
+            ['usuario' => 'admin'],
+            [
+                'name' => 'admin',
+                'senha' => bcrypt('administrador'),
+            ]
+        );
+
+        if ($user) {
+            $user->assignRole('user');
+        }
     }
 }

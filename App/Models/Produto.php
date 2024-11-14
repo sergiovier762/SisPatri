@@ -14,7 +14,6 @@ class Produto extends Model
         'descricao',
         'preco',
         'sala_id',
-        'quantidade',
         'fornecedor_id',
         'numero_fatura',
         'numero_patrimonio',
