@@ -139,6 +139,10 @@
                                             <input type="text" class="form-control" id="descricao" name="descricao" value="{{ $produto->descricao }}" required>
                                         </div>
                                         <div class="form-group">
+                                            <label for="marca">Marca</label>
+                                            <input type="text" class="form-control" id="marca" name="marca" value="{{ $produto->marca }}" required>
+                                        </div>
+                                        <div class="form-group">
                                             <label for="preco">Preço</label>
                                             <input type="number" class="form-control" id="preco" name="preco" value="{{ $produto->preco }}" required>
                                         </div>

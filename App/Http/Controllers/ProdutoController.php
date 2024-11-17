@@ -21,6 +21,7 @@ class ProdutoController extends Controller
         $input = $request->validate([
             'nome' => ['required'],
             'descricao' => ['required'],
+            'marca' => ['required'],
             'preco' => ['required', 'numeric'],
             'sala_id' => ['required', 'exists:salas,id'],
             'fornecedor_id' => ['required', 'exists:fornecedores,id'],

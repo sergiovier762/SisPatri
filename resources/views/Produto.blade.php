@@ -170,6 +170,11 @@
                                                     </a>
                                                 </th>
                                                 <th>
+                                                    <a href="{{ route('produtos', ['sort' => 'marca', 'direction' => $direction == 'asc' ? 'desc' : 'asc']) }}" style="color: black;">
+                                                        Marca
+                                                    </a>
+                                                </th>
+                                                <th>
                                                     <a href="{{ route('produtos', ['sort' => 'preco', 'direction' => $direction == 'asc' ? 'desc' : 'asc']) }}" style="color: black;">
                                                         Preço
                                                     </a>
@@ -207,6 +212,7 @@
                                             <tr>
                                                 <td>{{ $produto->nome }}</td>
                                                 <td>{{ $produto->descricao }}</td>
+                                                <td>{{ $produto->marca }}</td>
                                                 <td>{{"R$ " . number_format($produto->preco, 2, ',', '.') }}</td>
                                                 <td>{{ $produto->sala->nome }}</td>
                                                 <td>{{ $produto->fornecedor->nome }}</td>

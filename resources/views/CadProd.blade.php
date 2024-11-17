@@ -170,6 +170,10 @@
                                             <input type="text" class="form-control" id="descricao" name="descricao" value="{{ old('descricao', $produto['descricao'] ?? '') }}" required>
                                         </div>
                                         <div class="form-group">
+                                            <label for="marca">Marca</label>
+                                            <input type="text" class="form-control" id="marca" name="marca" value="{{ old('marca', $produto['marca'] ?? '') }}" required>
+                                        </div>
+                                        <div class="form-group">
                                             <label for="preco">Preço</label>
                                             <input type="number" class="form-control" id="preco" name="preco" value="{{ old('preco', $produto['preco'] ?? '') }}" required onwheel="this.blur()">
                                         </div>
