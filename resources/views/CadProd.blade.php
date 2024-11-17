@@ -20,9 +20,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('sair') }}" role="button">
-                        <i class="fas fa-sign-out-alt"></i>
-                    </a>
+                    <form action="{{ route('sair') }}" method="POST" class="d-inline">
+                        @csrf
+                        <button type="submit" class="nav-link btn btn-link" role="button">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </button>
+                    </form>
                 </li>
             </ul>
         </nav>
@@ -190,6 +193,14 @@
                                             <select class="form-control" id="fornecedor_id" name="fornecedor_id" required>
                                                 @foreach($fornecedores as $fornecedor)
                                                 <option value="{{ $fornecedor->id }}" {{ (old('fornecedor_id', $produto['fornecedor_id'] ?? '') == $fornecedor->id) ? 'selected' : '' }}>{{ $fornecedor->nome }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="usuario_id">Usuário</label>
+                                            <select class="form-control" id="usuario_id" name="usuario_id" required>
+                                                @foreach($usuarios as $usuario)
+                                                <option value="{{ $usuario->id }}" {{ (old('usuario_id', $produto['usuario_id'] ?? '') == $usuario->id) ? 'selected' : '' }}>{{ $usuario->nome }}</option>
                                                 @endforeach
                                             </select>
                                         </div>

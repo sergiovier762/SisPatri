@@ -22,6 +22,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/usuarios', [UsuarioController::class, 'index'])
         ->middleware('can:access user page')
         ->name('usuarios.index');
+    Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios');
     Route::get('usuarios/create', [UsuarioController::class, 'create'])->name('usuarios.create');
     Route::post('usuarios', [UsuarioController::class, 'store'])->name('usuarios.store');
     Route::get('usuarios/{id}/edit', [UsuarioController::class, 'edit'])->name('usuarios.edit');

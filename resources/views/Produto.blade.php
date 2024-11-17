@@ -20,9 +20,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('sair') }}" role="button">
-                        <i class="fas fa-sign-out-alt"></i>
-                    </a>
+                    <form action="{{ route('sair') }}" method="POST" class="d-inline">
+                        @csrf
+                        <button type="submit" class="nav-link btn btn-link" role="button">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </button>
+                    </form>
                 </li>
             </ul>
         </nav>
@@ -190,6 +193,11 @@
                                                     </a>
                                                 </th>
                                                 <th>
+                                                    <a href="{{ route('produtos', ['sort' => 'usuario_id', 'direction' => $direction == 'asc' ? 'desc' : 'asc']) }}" style="color: black;">
+                                                        Usuário
+                                                    </a>
+                                                </th>
+                                                <th>
                                                     <a href="{{ route('produtos', ['sort' => 'numero_fatura', 'direction' => $direction == 'asc' ? 'desc' : 'asc']) }}" style="color: black;">
                                                         Número da Fatura
                                                     </a>
@@ -216,6 +224,7 @@
                                                 <td>{{"R$ " . number_format($produto->preco, 2, ',', '.') }}</td>
                                                 <td>{{ $produto->sala->nome }}</td>
                                                 <td>{{ $produto->fornecedor->nome }}</td>
+                                                <td>{{ $produto->user->name ?? 'N/A' }}</td>
                                                 <td>{{ $produto->numero_fatura }}</td>
                                                 <td>{{ $produto->numero_patrimonio }}</td>
                                                 <td>{{ \Carbon\Carbon::parse($produto->data_aquisicao)->format('d/m/Y') }}</td>

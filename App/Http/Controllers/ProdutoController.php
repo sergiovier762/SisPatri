@@ -6,6 +6,8 @@ use App\Models\Produto;
 use App\Models\Sala;
 use App\Models\Fornecedor;
 use Illuminate\Http\Request;
+use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 
 class ProdutoController extends Controller
 {
@@ -13,30 +15,31 @@ class ProdutoController extends Controller
     {
         $salas = Sala::all();
         $fornecedores = Fornecedor::all();
-        return view('CadProd', compact('salas', 'fornecedores'));
+        $usuarios = User::all();
+        return view('CadProd', compact('salas', 'fornecedores', 'usuarios'));
     }
 
     public function store(Request $request)
     {
-        $input = $request->validate([
-            'nome' => ['required'],
-            'descricao' => ['required'],
-            'marca' => ['required'],
-            'preco' => ['required', 'numeric'],
-            'sala_id' => ['required', 'exists:salas,id'],
-            'fornecedor_id' => ['required', 'exists:fornecedores,id'],
-            'numero_fatura' => ['required'],
-            'numero_patrimonio' => ['required', 'unique:produtos,numero_patrimonio'],
-            'data_aquisicao' => ['required', 'date']
+        $validatedData = $request->validate([
+            'nome' => 'required|string|max:255',
+            'descricao' => 'required|string',
+            'marca' => 'nullable|string',
+            'preco' => 'required|numeric',
+            'sala_id' => 'required|exists:salas,id',
+            'fornecedor_id' => 'required|exists:fornecedores,id',
+            'numero_fatura' => 'required',
+            'numero_patrimonio' => 'required|unique:produtos,numero_patrimonio',
+            'data_aquisicao' => 'required|date'
         ], [
             'numero_patrimonio.unique' => 'O número de patrimônio já existe.',
         ]);
 
-        $produto = Produto::create($input);
-        return redirect()->route('produtos')->with([
-            'success' => 'Produto cadastrado com sucesso!',
-            'produto_id' => $produto->id
-        ]);
+        $produto = new Produto($validatedData);
+        $produto->user_id = Auth::id(); // Associa o usuário logado
+        $produto->save();
+
+        return redirect()->route('produtos')->with('success', 'Produto cadastrado com sucesso!');
     }
 
     public function index(Request $request)
@@ -136,7 +139,7 @@ class ProdutoController extends Controller
         }
 
         $dadosProduto = $produto->toArray();
-    unset($dadosProduto['numero_patrimonio']);
+        unset($dadosProduto['numero_patrimonio']);
 
         return view('CadProd', [
             'salas' => Sala::all(),
