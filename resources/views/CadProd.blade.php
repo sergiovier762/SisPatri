@@ -197,14 +197,6 @@
                                             </select>
                                         </div>
                                         <div class="form-group">
-                                            <label for="usuario_id">Usuário</label>
-                                            <select class="form-control" id="usuario_id" name="usuario_id" required>
-                                                @foreach($usuarios as $usuario)
-                                                <option value="{{ $usuario->id }}" {{ (old('usuario_id', $produto['usuario_id'] ?? '') == $usuario->id) ? 'selected' : '' }}>{{ $usuario->nome }}</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-                                        <div class="form-group">
                                             <label for="numero_fatura">Número da Fatura</label>
                                             <input type="text" class="form-control" id="numero_fatura" name="numero_fatura" value="{{ old('numero_fatura', $produto['numero_fatura'] ?? '') }}" required>
                                         </div>

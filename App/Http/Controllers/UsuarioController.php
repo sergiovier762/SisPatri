@@ -16,6 +16,7 @@ class UsuarioController extends Controller
 
     public function index()
     {
+        $this->authorize('view-users');
         $usuarios = User::all();
         return view('Usuario', compact('usuarios'));
     }
