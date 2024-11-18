@@ -16,6 +16,7 @@ class Produto extends Model
         'preco',
         'sala_id',
         'fornecedor_id',
+        'user_id',
         'numero_fatura',
         'numero_patrimonio',
         'data_aquisicao'
@@ -29,5 +30,10 @@ class Produto extends Model
     public function fornecedor()
     {
         return $this->belongsTo(Fornecedor::class);
+    }
+
+    public function user()
+   {
+        return $this->belongsTo(User::class);
     }
 }

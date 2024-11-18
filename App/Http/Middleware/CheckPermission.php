@@ -1,8 +1,11 @@
 <?php
+
 namespace App\Http\Middleware;
+
 use Closure;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+
 class CheckPermission
 {
     /**
@@ -13,6 +16,7 @@ class CheckPermission
         if (!Auth::check() || !Auth::user()->can($permission)) {
             abort(403, 'This action is unauthorized.');
         }
+
         return $next($request);
     }
 }

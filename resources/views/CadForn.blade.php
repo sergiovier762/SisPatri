@@ -21,9 +21,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('sair') }}" role="button">
-                        <i class="fas fa-sign-out-alt"></i>
-                    </a>
+                    <form action="{{ route('sair') }}" method="POST" class="d-inline">
+                        @csrf
+                        <button type="submit" class="nav-link btn btn-link" role="button">
+                            <i class="fas fa-sign-out-alt"></i>
+                        </button>
+                    </form>
                 </li>
             </ul>
         </nav>
