@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Console\Commands;
+namespace app\Console\Commands;
 
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Hash;
-use App\Models\User; // Certifique-se de que o caminho do modelo está correto
+use app\Models\User; // Certifique-se de que o caminho do modelo está correto
 
 class HashPasswords extends Command
 {

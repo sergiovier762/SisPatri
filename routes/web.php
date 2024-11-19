@@ -1,11 +1,11 @@
 <?php
 
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\AdministracaoController;
-use App\Http\Controllers\ProdutoController;
-use App\Http\Controllers\FornecedorController;
-use App\Http\Controllers\SalaController;
-use App\Http\Controllers\UsuarioController;
+use app\Http\Controllers\LoginController;
+use app\Http\Controllers\AdministracaoController;
+use app\Http\Controllers\ProdutoController;
+use app\Http\Controllers\FornecedorController;
+use app\Http\Controllers\SalaController;
+use app\Http\Controllers\UsuarioController;
 use Illuminate\Support\Facades\Route;
 
 // Rotas de autenticação

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace app\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\User;
+use app\Models\User;
 use Spatie\Permission\Models\Permission;
 use Illuminate\Routing\Controller;
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Console\Commands;
+namespace app\Console\Commands;
 
 use Illuminate\Console\Command;
-use App\Models\User;
+use app\Models\User;
 use Illuminate\Support\Facades\Hash;
 
 class UpdateUserPassword extends Command

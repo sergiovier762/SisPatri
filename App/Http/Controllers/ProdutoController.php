@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace app\Http\Controllers;
 
-use App\Models\Produto;
-use App\Models\Sala;
-use App\Models\Fornecedor;
+use app\Models\Produto;
+use app\Models\Sala;
+use app\Models\Fornecedor;
 use Illuminate\Http\Request;
-use App\Models\User;
+use app\Models\User;
 use Illuminate\Support\Facades\Auth;
 
 class ProdutoController extends Controller

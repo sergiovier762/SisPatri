@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace app\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use app\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -22,7 +22,7 @@ class LoginController extends Controller
             'senha' => 'required',
         ]);
 
-        $user = \App\Models\User::where('usuario', $request->usuario)->first();
+        $user = \app\Models\User::where('usuario', $request->usuario)->first();
 
         if ($user && Hash::check($request->senha, $user->senha)) {
             Auth::login($user);
