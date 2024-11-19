@@ -19,6 +19,11 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/Administracao', [AdministracaoController::class, 'index'])->name('Administracao');
     Route::post('/sair', [LoginController::class, 'sair'])->name('sair');
 
+    Route::group(['middleware' => ['auth']], function () {
+        Route::get('/usuarios', [UsuarioController::class, 'index'])->name('usuarios');
+        Route::post('/usuarios', [UsuarioController::class, 'store'])->name('usuarios.store');
+    });
+
     Route::get('/usuarios', [UsuarioController::class, 'index'])
         ->middleware('permission:view-users')
         ->name('usuarios.index');

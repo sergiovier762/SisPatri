@@ -162,6 +162,7 @@
                                                 <th>Nome</th>
                                                 <th>Usuário</th>
                                                 <th>Permissões</th>
+                                                <th>Ações</th>
                                             </tr>
                                         </thead>
                                         <tbody>

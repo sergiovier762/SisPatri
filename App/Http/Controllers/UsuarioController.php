@@ -9,14 +9,9 @@ use Illuminate\Routing\Controller;
 
 class UsuarioController extends Controller
 {
-    public function __construct()
-    {
-        $this->middleware('can:access user page')->only('index');
-    }
 
     public function index()
     {
-        $this->authorize('view-users');
         $usuarios = User::all();
         return view('Usuario', compact('usuarios'));
     }
