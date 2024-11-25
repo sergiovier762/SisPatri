@@ -32,6 +32,7 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('usuarios', [UsuarioController::class, 'store'])->name('usuarios.store');
     Route::get('usuarios/{id}/edit', [UsuarioController::class, 'edit'])->name('usuarios.edit');
     Route::put('usuarios/{id}', [UsuarioController::class, 'update'])->name('usuarios.update');
+    Route::put('/usuarios/{id}/permissions', [UsuarioController::class, 'updatePermissions'])->name('usuarios.updatePermissions');
     Route::delete('usuarios/{id}', [UsuarioController::class, 'destroy'])->name('usuarios.destroy');
     Route::get('usuarios/search', [UsuarioController::class, 'search'])->name('usuarios.search');
     Route::get('/usuario', [UsuarioController::class, 'showUserPermissions'])->name('showUserPermissions');

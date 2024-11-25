@@ -171,9 +171,18 @@
                                                 <td>{{ $usuario->name }}</td>
                                                 <td>{{ $usuario->usuario }}</td>
                                                 <td>
-                                                    @foreach($usuario->getAllPermissions() as $permission)
-                                                        <span class="badge badge-info">{{ $permission->name }}</span>
-                                                    @endforeach
+                                                    <form action="{{ route('usuarios.updatePermissions', $usuario->id) }}" method="POST">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        @foreach($allPermissions as $permission)
+                                                            <div class="form-check">
+                                                                <input type="checkbox" class="form-check-input" name="permissions[]" value="{{ $permission->name }}"
+                                                                    {{ $usuario->hasPermissionTo($permission->name) ? 'checked' : '' }}>
+                                                                <label class="form-check-label">{{ $permission->name }}</label>
+                                                            </div>
+                                                        @endforeach
+                                                        <button type="submit" class="btn btn-primary btn-sm mt-2">Atualizar Permissões</button>
+                                                    </form>
                                                 </td>
                                                 <td>
                                                     <a href="{{ route('usuarios.edit', $usuario->id) }}" class="btn btn-primary btn-sm">Editar</a>

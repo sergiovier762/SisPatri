@@ -13,7 +13,9 @@ class UsuarioController extends Controller
     public function index()
     {
         $usuarios = User::all();
-        return view('Usuario', compact('usuarios'));
+        $allPermissions = Permission::all();
+        dd($allPermissions);
+        return view('Usuario', compact('usuarios', 'allPermissions'));
     }
 
     public function create()
@@ -99,16 +101,12 @@ class UsuarioController extends Controller
         return view('Usuario', compact('users', 'permissions'));
     }
 
-    public function updateUserPermissions(Request $request)
+    public function updatePermissions(Request $request, $id)
     {
-        foreach ($request->permissions as $userId => $permissions) {
-            $user = User::find($userId);
-            if ($user) {
-                $user->syncPermissions($permissions);
-            }
-        }
+        $user = User::findOrFail($id);
+        $user->syncPermissions($request->input('permissions', [])); // Sincroniza as permissões
 
-        return redirect()->back()->with('success', 'Permissões atualizadas com sucesso!');
+        return redirect()->route('usuarios')->with('success', 'Permissões atualizadas com sucesso.');
     }
 
     public function assignRoleToUser($userId)
